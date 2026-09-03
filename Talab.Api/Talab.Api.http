@@ -1,0 +1,6 @@
+@Talab.Api_HostAddress = http://localhost:5153
+
+GET {{Talab.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

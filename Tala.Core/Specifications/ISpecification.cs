@@ -14,6 +14,6 @@ namespace Tala.Core.Specifications
         public List<Expression<Func<T,object>>> Include { get; set; }
         public Expression<Func<T, object>> OrderBy { get; set; }
         public Expression<Func<T, object>> OrderByDesc { get; set; }
-
+        public int Skip { get; set; }
     }
 }

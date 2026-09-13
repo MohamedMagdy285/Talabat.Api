@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Tala.Core.Specifications;
 using Tala.Repository;
 using Talab.Api.Dtos;
+using Talab.Api.Helpers;
 using Talabat.Core.Entities;
 using Talabat.Core.Repositories;
 
@@ -32,9 +33,9 @@ namespace Talab.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<ProductToReturnDto>>> GetProducts(string? sort)
+        public async Task<ActionResult<IEnumerable<ProductToReturnDto>>> GetProducts(ProductSpecParams specParams)
         {
-            var specs = new ProductWithBrandAndTypeSpecification(sort);
+            var specs = new ProductWithBrandAndTypeSpecification(specParams);
             var products = await _productRepository.GetAllWithSpecAsync(specs);
             var productsToReturn = _mapper.Map<IReadOnlyList<ProductToReturnDto>>(products);
             return Ok(productsToReturn);
@@ -43,7 +44,7 @@ namespace Talab.Api.Controllers
         public async Task<ActionResult<IEnumerable<ProductBrand>>> GetBrands()
         {
             var brands = await _brandRepo.GetAllAsync();
-            return Ok(brands);
+            return Ok(brands); 
         }
         [HttpGet("types")]
         public async Task<ActionResult<IEnumerable<ProductType>>> GetTypes()

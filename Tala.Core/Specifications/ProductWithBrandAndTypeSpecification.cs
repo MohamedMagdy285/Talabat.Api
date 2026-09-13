@@ -9,7 +9,11 @@ namespace Tala.Core.Specifications
 {
     public class ProductWithBrandAndTypeSpecification : BaseSpecification<Product>
     {
-        public ProductWithBrandAndTypeSpecification(string sort)
+        public ProductWithBrandAndTypeSpecification(string? sort, int? brandId, int? typeId)
+            :base(P=>
+                (!brandId.HasValue || P.ProductBrandId == brandId) &&
+                (!typeId.HasValue || P.ProductTypeId == typeId)
+            )
         {
             Include.Add(P => P.ProductBrand);
             Include.Add(P => P.ProductType);

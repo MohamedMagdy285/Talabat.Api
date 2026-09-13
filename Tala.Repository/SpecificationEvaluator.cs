@@ -18,10 +18,16 @@ namespace Tala.Repository
             if(spec.Criteria is not null)
                 query = query.Where(spec.Criteria);
 
+
             if (spec.OrderBy is not null)
                 query = query.OrderBy(spec.OrderBy);
             if(spec.OrderByDesc is not null)
                 query = query.OrderByDescending(spec.OrderByDesc);
+
+            if(spec.IsPaginationEnabled is true)
+                query = query.Skip(spec.Skip).Take(spec.Take);
+          
+
 
             query = spec.Include.Aggregate(query, (currentQuery, includeExpression) => currentQuery.Include(includeExpression));
 

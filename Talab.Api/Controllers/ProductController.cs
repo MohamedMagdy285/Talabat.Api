@@ -5,6 +5,7 @@ using Tala.Core.Specifications;
 using Tala.Repository;
 using Talab.Api.Dtos;
 using Talab.Api.Helpers;
+using Talab.Core.Helpers;
 using Talabat.Core.Entities;
 using Talabat.Core.Repositories;
 
@@ -33,7 +34,7 @@ namespace Talab.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<ProductToReturnDto>>> GetProducts(ProductSpecParams specParams)
+        public async Task<ActionResult<IEnumerable<ProductToReturnDto>>> GetProducts([FromQuery]ProductSpecParams specParams)
         {
             var specs = new ProductWithBrandAndTypeSpecification(specParams);
             var products = await _productRepository.GetAllWithSpecAsync(specs);

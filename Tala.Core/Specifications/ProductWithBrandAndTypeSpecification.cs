@@ -3,24 +3,25 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Talab.Core.Helpers;
 using Talabat.Core.Entities;
 
 namespace Tala.Core.Specifications
 {
     public class ProductWithBrandAndTypeSpecification : BaseSpecification<Product>
     {
-        public ProductWithBrandAndTypeSpecification(string? sort, int? brandId, int? typeId)
+        public ProductWithBrandAndTypeSpecification(ProductSpecParams specParams)
             :base(P=>
-                (!brandId.HasValue || P.ProductBrandId == brandId) &&
-                (!typeId.HasValue || P.ProductTypeId == typeId)
+                (!specParams.BrandId.HasValue || P.ProductBrandId == specParams.BrandId) &&
+                (!specParams.TypeId.HasValue || P.ProductTypeId == specParams.TypeId)
             )
         {
             Include.Add(P => P.ProductBrand);
             Include.Add(P => P.ProductType);
 
-            if (!string.IsNullOrEmpty(sort))
+            if (!string.IsNullOrEmpty(specParams.Sort))
             {
-                switch(sort)
+                switch(specParams.Sort)
                 {
                 case "priceAsc":                    
                     AddOrderBy(P => P.Price);
@@ -33,6 +34,7 @@ namespace Tala.Core.Specifications
                     break;
                 }
             }
+            ApplyPagination(specParams.PageSize * (specParams.PageIndex - 1), specParams.PageSize);
         }
         public ProductWithBrandAndTypeSpecification(int id):base(P => P.Id == id)
         {

@@ -20,10 +20,8 @@ namespace Talabat.Repository
             _context = context;
         }
 
-        public Task<IReadOnlyList<T>> GetAllAsync()
-        {
-            throw new NotImplementedException();
-        }
+        public async Task<IReadOnlyList<T>> GetAllAsync()
+        => await _context.Set<T>().ToListAsync();
 
         public async Task<IReadOnlyList<T>> GetAllWithSpecAsync(ISpecification<T> spec)
          => await ApplySpec(spec).ToListAsync();

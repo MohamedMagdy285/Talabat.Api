@@ -12,10 +12,9 @@ namespace Tala.Core.Specifications
     {
         public Expression<Func<T, bool>> Criteria { get; set; }
         public List<Expression<Func<T, object>>> Include { get; set; } = new List<Expression<Func<T, object>>>();
-        //prod.where
-        //prod.where.include
-        //prod
-        //prod.include
+        public Expression<Func<T,object>> OrderBy { get; set; }
+        public Expression<Func<T,object>> OrderByDesc { get; set; }
+
         public BaseSpecification()
         {
 
@@ -23,6 +22,15 @@ namespace Tala.Core.Specifications
         public BaseSpecification(Expression<Func<T, bool>> criteria)
         {
             Criteria = criteria;
+        }
+
+        public void AddOrderBy(Expression<Func<T, object>> orderByExpression)
+        {
+            OrderBy = orderByExpression;
+        }
+        public void AddOrderByDesc(Expression<Func<T, object>> orderByDescExpression)
+        {
+            OrderByDesc = orderByDescExpression;
         }
     }
 }

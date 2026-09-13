@@ -32,9 +32,9 @@ namespace Talab.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<ProductToReturnDto>>> GetProducts()
+        public async Task<ActionResult<IEnumerable<ProductToReturnDto>>> GetProducts(string? sort)
         {
-            var specs = new ProductWithBrandAndTypeSpecification();
+            var specs = new ProductWithBrandAndTypeSpecification(sort);
             var products = await _productRepository.GetAllWithSpecAsync(specs);
             var productsToReturn = _mapper.Map<IReadOnlyList<ProductToReturnDto>>(products);
             return Ok(productsToReturn);

@@ -9,10 +9,26 @@ namespace Tala.Core.Specifications
 {
     public class ProductWithBrandAndTypeSpecification : BaseSpecification<Product>
     {
-        public ProductWithBrandAndTypeSpecification()
+        public ProductWithBrandAndTypeSpecification(string sort)
         {
             Include.Add(P => P.ProductBrand);
             Include.Add(P => P.ProductType);
+
+            if (!string.IsNullOrEmpty(sort))
+            {
+                switch(sort)
+                {
+                case "priceAsc":                    
+                    AddOrderBy(P => P.Price);
+                    break;
+                case "priceDesc":
+                    AddOrderByDesc(P => P.Price);
+                    break;
+                default:
+                    AddOrderBy(P => P.Name);
+                    break;
+                }
+            }
         }
         public ProductWithBrandAndTypeSpecification(int id):base(P => P.Id == id)
         {

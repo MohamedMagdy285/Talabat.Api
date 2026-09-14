@@ -12,6 +12,7 @@ namespace Tala.Core.Specifications
     {
         public ProductWithBrandAndTypeSpecification(ProductSpecParams specParams)
             :base(P=>
+                (string.IsNullOrEmpty(specParams.Search) || P.Name.ToLower().Contains(specParams.Search)) &&
                 (!specParams.BrandId.HasValue || P.ProductBrandId == specParams.BrandId) &&
                 (!specParams.TypeId.HasValue || P.ProductTypeId == specParams.TypeId)
             )

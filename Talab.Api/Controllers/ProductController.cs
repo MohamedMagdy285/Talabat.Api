@@ -38,8 +38,10 @@ namespace Talab.Api.Controllers
         {
             var specs = new ProductWithBrandAndTypeSpecification(specParams);
             var products = await _productRepository.GetAllWithSpecAsync(specs);
-            var productsToReturn = _mapper.Map<IReadOnlyList<ProductToReturnDto>>(products);
-            return Ok(productsToReturn);
+            var data = _mapper.Map<IReadOnlyList<ProductToReturnDto>>(products);
+            var countSpecs = new ProductWithFilterationForCountSpecification(specParams);
+            var count = await _productRepository.GetCountWithSpecAsync(countSpecs);
+            return Ok(new Pagination<ProductToReturnDto>(specParams.PageIndex,specParams.PageSize,count,data));
         }
         [HttpGet("brands")]
         public async Task<ActionResult<IEnumerable<ProductBrand>>> GetBrands()

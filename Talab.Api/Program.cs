@@ -1,4 +1,7 @@
 
+using Microsoft.AspNetCore.Identity;
+using Tala.Core.Entities.Identity;
+using Tala.Repository.Identity;
 using Talab.Api.Extensions;
 
 namespace Talab.Api
@@ -17,7 +20,14 @@ namespace Talab.Api
             builder.Services.AddSwaggerGen();
             var config = builder.Configuration;
             builder.Services.SqlServerConnection(config);
+            builder.Services.RedisConnection(config);
+            builder.Services.UserIdentityConnection(config);
             builder.Services.AddApplicationServices();
+
+            builder.Services.AddIdentity<AppUser, IdentityRole>()
+                .AddEntityFrameworkStores<AppIdentityDbContext>();
+
+            builder.Services.AddAuthentication(); 
             var app = builder.Build();
 
             app.Seeder();

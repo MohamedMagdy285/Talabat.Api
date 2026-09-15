@@ -1,5 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using Tala.Core.Entities.Identity;
 using Tala.Repository;
+using Tala.Repository.Identity;
 
 namespace Talab.Api.Extensions
 {
@@ -15,6 +18,12 @@ namespace Talab.Api.Extensions
                 var dbContext = services.GetRequiredService<StoreContext>();
                 await dbContext.Database.MigrateAsync();
                 await StoreContextSeeder.SeedAsync(dbContext);
+
+                var identityDbContext = services.GetRequiredService<AppIdentityDbContext>();
+                await identityDbContext.Database.MigrateAsync(); 
+
+                var userManager = services.GetRequiredService<UserManager<AppUser>>();
+                await AppIdentityDbContextSeed.SeedUsersAsync(userManager);
             }
             catch (Exception ex)
             {

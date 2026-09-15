@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.DataProtection;
+using Tala.Core.Repositories;
+using Tala.Repository;
 using Talab.Api.Helpers;
 using Talabat.Core.Repositories;
 using Talabat.Repository;
@@ -16,6 +18,8 @@ namespace Talab.Api.Extensions
 
 
             services.AddAutoMapper(typeof(MappingProfile));
+
+            services.AddScoped(typeof(IBasketRepository),typeof(BasketRepository));
 
             return services;
         }

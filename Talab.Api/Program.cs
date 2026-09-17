@@ -1,7 +1,12 @@
 
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 using Tala.Core.Entities.Identity;
+using Tala.Core.Services;
 using Tala.Repository.Identity;
+using Tala.Services;
 using Talab.Api.Extensions;
 
 namespace Talab.Api
@@ -24,10 +29,28 @@ namespace Talab.Api
             builder.Services.UserIdentityConnection(config);
             builder.Services.AddApplicationServices();
 
+            builder.Services.AddScoped(typeof(ITokenService),typeof(TokenService));
             builder.Services.AddIdentity<AppUser, IdentityRole>()
                 .AddEntityFrameworkStores<AppIdentityDbContext>();
 
-            builder.Services.AddAuthentication(); 
+            builder.Services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(options =>
+                {
+                    options.TokenValidationParameters = new TokenValidationParameters()
+                    {
+                        ValidateIssuer = true,
+                        ValidIssuer = builder.Configuration["Jwt:ValidIssuer"],
+                        ValidateAudience = true,
+                        ValidAudience = builder.Configuration["Jwt:ValidAudience"],
+                        ValidateIssuerSigningKey = true,
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"])),
+                        ValidateLifetime = true
+                    };
+                }); 
+            //builder.Services.AddAuthentication("Bearer"); 
             var app = builder.Build();
 
             app.Seeder();
@@ -38,9 +61,9 @@ namespace Talab.Api
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
-
             app.UseHttpsRedirection();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseStaticFiles();

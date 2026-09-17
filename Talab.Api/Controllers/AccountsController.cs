@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Tala.Core.Entities.Identity;
+using Tala.Core.Services;
 using Talab.Api.Dtos;
 
 namespace Talab.Api.Controllers
@@ -12,11 +13,16 @@ namespace Talab.Api.Controllers
     {
         private readonly UserManager<AppUser> _userManager;
         private readonly SignInManager<AppUser> _signInManager;
+        private readonly ITokenService _tokenService;
 
-        public AccountsController(UserManager<AppUser> userManager,SignInManager<AppUser> signInManager)
+        public AccountsController(
+            UserManager<AppUser> userManager,
+            SignInManager<AppUser> signInManager,
+            ITokenService tokenService)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _tokenService = tokenService;
         }
 
         [HttpPost("login")]
@@ -37,7 +43,7 @@ namespace Talab.Api.Controllers
             {
                 DisplayName = user.DisplayName,
                 Email = user.Email,
-                Token = "This is a token"
+                Token = await _tokenService.CreateTokenAsync(user, _userManager)
             });
 
         }
@@ -61,7 +67,7 @@ namespace Talab.Api.Controllers
             {
                 DisplayName = user.DisplayName,
                 Email = user.Email,
-                Token = "This is a token"
+                Token = await _tokenService.CreateTokenAsync(user, _userManager)
             });
         }
 

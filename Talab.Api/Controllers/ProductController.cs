@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Tala.Core.Specifications;
@@ -32,7 +33,7 @@ namespace Talab.Api.Controllers
             _brandRepo = brandRepo;
             _typeRepo = typeRepo;
         }
-
+        [Authorize]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ProductToReturnDto>>> GetProducts([FromQuery]ProductSpecParams specParams)
         {

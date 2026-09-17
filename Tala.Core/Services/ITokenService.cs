@@ -1,12 +1,15 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Tala.Core.Entities.Identity;
 
 namespace Tala.Core.Services
 {
-    internal interface ITokenService
+    public interface ITokenService
     {
+        Task<string> CreateTokenAsync(AppUser user,UserManager<AppUser> userManager);
     }
 }

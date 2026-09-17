@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Tala.Repository\Tala.Repository.csproj" />
+    <ProjectReference Include="..\Tala.Services\Tala.Services.csproj" />
   </ItemGroup>
 
 </Project>

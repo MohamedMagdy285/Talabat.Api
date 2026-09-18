@@ -1,0 +1,107 @@
+[33mcommit 9cd89cd907571a6af00071c7ce4ac1b9b4f13489[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: Mohamed Magdy <mg6112006@gmail.com>
+Date:   Fri Sep 18 09:14:41 2026 +0300
+
+    Chech if email exists in register
+
+[33mcommit cc9b6fa12b48fb5bc528a7dc75885c72a2b58421[m
+Author: Mohamed Magdy <mg6112006@gmail.com>
+Date:   Fri Sep 18 09:09:52 2026 +0300
+
+    Add UpdateUserAddress Feature
+
+[33mcommit 7285c163338883253413ef40eef2933b5edb78e8[m
+Author: Mohamed Magdy <mg6112006@gmail.com>
+Date:   Fri Sep 18 08:36:11 2026 +0300
+
+    Add Get Current User in Accounts Controller
+
+[33mcommit 29e53485768112416fc18a839c9c355c09677c28[m
+Author: Mohamed Magdy <mg6112006@gmail.com>
+Date:   Thu Sep 17 14:40:47 2026 +0300
+
+    fix bugs in JWT
+
+[33mcommit c2713379290a8c3bfbd5758b10bb896a79cca843[m
+Author: Mohamed Magdy <mg6112006@gmail.com>
+Date:   Thu Sep 17 11:17:27 2026 +0300
+
+    Implemented JWT authentication and modified project references
+
+[33mcommit ee304777a3a57d07b2cce6c5b2fe3e41d1c61467[m
+Author: mohamed Elsisi <mg6112006@gmail.com>
+Date:   Wed Sep 16 15:44:24 2026 +0300
+
+    Implemented Sign Up
+
+[33mcommit 96b22ce3546cc2189a3a8a6fa294b08e0f1def44[m
+Author: mohamed Elsisi <mg6112006@gmail.com>
+Date:   Wed Sep 16 14:50:06 2026 +0300
+
+    Implement Security & Log in Repo with Dto
+
+[33mcommit 244178648947c123b8cb61e45ab092a4b8e122c1[m
+Author: mohamed Elsisi <mg6112006@gmail.com>
+Date:   Tue Sep 15 18:33:17 2026 +0300
+
+    Install Identity & fix bug in Basket Controller
+
+[33mcommit 322cde2e4a7270b4fc964afeba14e290980950bc[m
+Author: mohamed Elsisi <mg6112006@gmail.com>
+Date:   Tue Sep 15 14:22:18 2026 +0300
+
+    Install Redis and Add Basket&CustomerBasket & Repo
+
+[33mcommit 579c3c6ea2846deb3f881f2e1f0a187f0aab2099[m
+Author: mohamed Elsisi <mg6112006@gmail.com>
+Date:   Mon Sep 14 15:47:59 2026 +0300
+
+    Add Search & Improvments on Pagination
+
+[33mcommit b52e45d6c4a11351fafb68e82546686dc9007aea[m
+Author: mohamed Elsisi <mg6112006@gmail.com>
+Date:   Sun Sep 13 18:59:53 2026 +0300
+
+    Pagination&fix bugs due to git&github
+
+[33mcommit 9a58f69dd2bc69d2d1244e55d10ebdfc72bed5d4[m[33m ([m[1;32mFilter[m[33m)[m
+Author: mohamed Elsisi <mg6112006@gmail.com>
+Date:   Sun Sep 13 17:32:28 2026 +0300
+
+    Added Filteration Feature
+
+[33mcommit 2a6ce23757ccf56cd3e3a25e83eca8ba03e910a9[m[33m ([m[1;31morigin/sort[m[33m, [m[1;32msort[m[33m)[m
+Author: mohamed Elsisi <mg6112006@gmail.com>
+Date:   Sun Sep 13 16:29:59 2026 +0300
+
+    Sorting Feature
+
+[33mcommit b723a2a2a3fccec49f71680785ec28c92a2bdbba[m
+Author: mohamed Elsisi <mg6112006@gmail.com>
+Date:   Sun Sep 13 15:55:15 2026 +0300
+
+    IMplemented GetAll async & Add endpoint for Brand&Type
+
+[33mcommit 9c433ac10f54521e1d518b8c9d09c7df07c5b9ae[m
+Author: mohamed Elsisi <mg6112006@gmail.com>
+Date:   Thu Sep 3 13:26:27 2026 +0300
+
+    Added wwwroot with middleware
+
+[33mcommit 0c26c1573d58b5b54096e2838f9e385cee75a569[m[33m ([m[1;31morigin/ProductUrlSolver[m[33m, [m[1;32mProductUrlSolver[m[33m)[m
+Author: mohamed Elsisi <mg6112006@gmail.com>
+Date:   Thu Sep 3 13:07:39 2026 +0300
+
+    Update product picture URL resolver Added ApiBase in appsetting
+
+[33mcommit 12a77d7f8871153fd0f081ba4e53d336c6b9a194[m
+Author: LOQ <mg6112006@gmail.com>
+Date:   Thu Sep 3 12:20:36 2026 +0300
+
+    Add project files.
+
+[33mcommit 0b3cdd6dbf86c8f8cce800deb1605471526ffdac[m
+Author: LOQ <mg6112006@gmail.com>
+Date:   Thu Sep 3 12:20:34 2026 +0300
+
+    Add .gitattributes and .gitignore.

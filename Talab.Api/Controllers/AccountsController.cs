@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 using Tala.Core.Entities.Identity;
 using Tala.Core.Services;
 using Talab.Api.Dtos;
@@ -63,6 +65,20 @@ namespace Talab.Api.Controllers
             if (!result.Succeeded)
                 return BadRequest(result.Errors);
 
+            return Ok(new UserDto()
+            {
+                DisplayName = user.DisplayName,
+                Email = user.Email,
+                Token = await _tokenService.CreateTokenAsync(user, _userManager)
+            });
+        }
+
+        [Authorize]
+        [HttpGet]
+        public async Task<ActionResult<UserDto>> GetCurrentUser()
+        {
+            var email = User.FindFirstValue(ClaimTypes.Email);
+            var user =await _userManager.FindByEmailAsync(email);
             return Ok(new UserDto()
             {
                 DisplayName = user.DisplayName,

@@ -33,23 +33,7 @@ namespace Talab.Api
             builder.Services.AddIdentity<AppUser, IdentityRole>()
                 .AddEntityFrameworkStores<AppIdentityDbContext>();
 
-            builder.Services.AddAuthentication(options =>
-            {
-                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            }).AddJwtBearer(options =>
-                {
-                    options.TokenValidationParameters = new TokenValidationParameters()
-                    {
-                        ValidateIssuer = true,
-                        ValidIssuer = builder.Configuration["Jwt:ValidIssuer"],
-                        ValidateAudience = true,
-                        ValidAudience = builder.Configuration["Jwt:ValidAudience"],
-                        ValidateIssuerSigningKey = true,
-                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"])),
-                        ValidateLifetime = true
-                    };
-                }); 
+            builder.Services.AddJwtAuthentication(config);
             //builder.Services.AddAuthentication("Bearer"); 
             var app = builder.Build();
 

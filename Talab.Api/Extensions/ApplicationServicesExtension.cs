@@ -1,6 +1,11 @@
 ﻿using Microsoft.AspNetCore.DataProtection;
+using Microsoft.AspNetCore.Identity;
+using Tala.Core.Entities.Identity;
 using Tala.Core.Repositories;
+using Tala.Core.Services;
 using Tala.Repository;
+using Tala.Repository.Identity;
+using Tala.Services;
 using Talab.Api.Helpers;
 using Talabat.Core.Repositories;
 using Talabat.Repository;
@@ -20,6 +25,11 @@ namespace Talab.Api.Extensions
             services.AddAutoMapper(typeof(MappingProfile));
 
             services.AddScoped(typeof(IBasketRepository),typeof(BasketRepository));
+
+            services.AddScoped(typeof(ITokenService), typeof(TokenService));
+ 
+            services.AddIdentity<AppUser, IdentityRole>()
+                .AddEntityFrameworkStores<AppIdentityDbContext>();
 
             return services;
         }

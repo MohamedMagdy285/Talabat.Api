@@ -29,9 +29,9 @@ namespace Talab.Api
             builder.Services.UserIdentityConnection(config);
             builder.Services.AddApplicationServices();
 
-            builder.Services.AddScoped(typeof(ITokenService),typeof(TokenService));
-            builder.Services.AddIdentity<AppUser, IdentityRole>()
-                .AddEntityFrameworkStores<AppIdentityDbContext>();
+            //builder.Services.AddScoped(typeof(ITokenService),typeof(TokenService));
+            //builder.Services.AddIdentity<AppUser, IdentityRole>()
+            //    .AddEntityFrameworkStores<AppIdentityDbContext>();
 
             builder.Services.AddJwtAuthentication(config);
             //builder.Services.AddAuthentication("Bearer"); 

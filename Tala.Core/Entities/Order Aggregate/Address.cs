@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Talabat.Core.Entities.Order_Aggregate
+namespace Tala.Core.Entities.Order_Aggregate
 {
     public class Address
     {

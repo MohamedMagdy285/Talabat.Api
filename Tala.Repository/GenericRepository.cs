@@ -26,10 +26,8 @@ namespace Talabat.Repository
         public async Task<IReadOnlyList<T>> GetAllWithSpecAsync(ISpecification<T> spec)
          => await ApplySpec(spec).ToListAsync();
 
-        public Task<T> GetByIdAsync()
-        {
-            throw new NotImplementedException();
-        }
+        public async Task<T> GetByIdAsync(int id)
+        => await _context.Set<T>().FindAsync(id);
 
         public Task<T> GetByIdWithSpecAsync(ISpecification<T> spec)
          => ApplySpec(spec).FirstOrDefaultAsync();
@@ -39,5 +37,15 @@ namespace Talabat.Repository
 
         public IQueryable<T> ApplySpec(ISpecification<T> spec)
          => SpecificationEvaluator<T>.GetQuery(_context.Set<T>(), spec);
+
+        public async Task Add(T entity)
+         => await _context.Set<T>().AddAsync(entity);
+
+
+        public void Update(T entity)
+        => _context.Set<T>().Update(entity);
+
+        public void Delete(T entity)
+        => _context.Set<T>().Remove(entity);
     }
 }

@@ -5,8 +5,8 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using Tala.Core.Entities.Order_Aggregate;
 using Talabat.Core.Entities;
-using Talabat.Core.Entities.Order_Aggregate;
 
 namespace Tala.Repository
 {

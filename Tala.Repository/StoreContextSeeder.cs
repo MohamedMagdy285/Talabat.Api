@@ -5,6 +5,7 @@ using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Talabat.Core.Entities;
+using Talabat.Core.Entities.Order_Aggregate;
 
 namespace Tala.Repository
 {
@@ -53,6 +54,23 @@ namespace Tala.Repository
                 {
                     foreach (var product in products)
                         await context.Set<Product>().AddAsync(product);
+
+                    await context.SaveChangesAsync();
+                }
+            }
+
+            #endregion
+
+            #region DeliveryMethods
+            if (!context.DeliveryMethods.Any())
+            {
+                var deliveryMethodsData = File.ReadAllText("../Tala.Repository/Data/DataSeed/delivery.json");
+                var deliveryMethods = JsonSerializer.Deserialize<List<DeliveryMethod>>(deliveryMethodsData);
+
+                if (deliveryMethods is not null && deliveryMethods.Count > 0)
+                {
+                    foreach (var deliveryMethod in deliveryMethods)
+                        await context.Set<DeliveryMethod>().AddAsync(deliveryMethod);
 
                     await context.SaveChangesAsync();
                 }

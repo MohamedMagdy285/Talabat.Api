@@ -11,7 +11,8 @@ namespace Tala.Core.Services
     {
         Task<Order> CreateOrderAsync(string buyerEmail, string basketId, int deliveryMethod, Address shippingAddress);
         Task<IReadOnlyList<Order>> GetOrdersForUserAsync(string buyerEmail);
-        Task<Order> GetOrderByIdForUserAsync(string buyerEmail,int orderId);
+        Task<Order?> GetOrderByIdForUserAsync(string buyerEmail,int orderId);
+        Task<IReadOnlyList<DeliveryMethod>> GetDeliveryMethodsAsync();
 
     }
 }

@@ -16,6 +16,12 @@ namespace Tala.Core.Specifications.OrderSpec
             Include.Add(o => o.Items);
             AddOrderBy(o => o.OrderDate);
         }
-        
+        public OrderWithItemsAndDeliverMethodSpecifications(string email,int orderId)
+            : base(o => o.BuyerEmail == email
+                   && o.Id==orderId)
+        {
+            Include.Add(o => o.DeliveryMethod);
+            Include.Add(o => o.Items);
+        }
     }
 }

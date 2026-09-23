@@ -43,7 +43,22 @@ namespace Talab.Api.Controllers
             var orders = await _orderService.GetOrdersForUserAsync(buyerEmail);
             return Ok(orders);
         }
-        
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Tala.Core.Entities.Order_Aggregate.Order>>GetOrderForUser(int id)
+        {
+            var email = User.FindFirstValue(ClaimTypes.Email);
+            var order = await _orderService.GetOrderByIdForUserAsync(email, id);
+            if (order is null)
+                return NotFound();
+            return Ok(order);
+        }
+        [HttpGet("deliveryMethods")]
+        public async Task<ActionResult<IReadOnlyList<DeliveryMethod>>> GetDeliveryMethods()
+        {
+            var deliveryMethods = await _orderService.GetDeliveryMethodsAsync();
+            return Ok(deliveryMethods);
+        }
     }
 
 }

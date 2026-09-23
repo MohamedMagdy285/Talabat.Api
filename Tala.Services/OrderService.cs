@@ -90,10 +90,19 @@ namespace Tala.Services
             return null;
         }
 
-        public async Task<Order> GetOrderByIdForUserAsync(string buyerEmail, int orderId)
+        public Task<IReadOnlyList<DeliveryMethod>> GetDeliveryMethodsAsync()
         {
-            
-            throw new NotImplementedException();
+            var deliveryMethods = _unitOfWork.Repository<DeliveryMethod>().GetAllAsync();
+            return deliveryMethods;
+        }
+
+        public async Task<Order?> GetOrderByIdForUserAsync(string buyerEmail, int orderId)
+        {
+            var spec = new OrderWithItemsAndDeliverMethodSpecifications(buyerEmail,orderId);
+            var order = await _unitOfWork.Repository<Order>().GetByIdWithSpecAsync(spec);
+            if (order is null)
+                return null;
+            return order;
         }
 
         public async Task<IReadOnlyList<Order>> GetOrdersForUserAsync(string buyerEmail)

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Identity;
+using Tala.Core;
 using Tala.Core.Entities.Identity;
 using Tala.Core.Repositories;
 using Tala.Core.Services;
@@ -21,6 +22,9 @@ namespace Talab.Api.Extensions
             // hna b2olo y3ml Create l ay haga gaya mn IGeneric => Allow DependancyInjection = GOOD :D
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 
+            services.AddScoped(typeof(IUnitOfWork), typeof(UnitOfWork));
+
+            services.AddScoped(typeof(IOrderService), typeof(OrderService));
 
             services.AddAutoMapper(typeof(MappingProfile));
 

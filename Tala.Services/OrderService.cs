@@ -7,6 +7,7 @@ using Tala.Core;
 using Tala.Core.Entities.Order_Aggregate;
 using Tala.Core.Repositories;
 using Tala.Core.Services;
+using Tala.Core.Specifications.OrderSpec;
 using Talabat.Core.Entities;
 using Talabat.Core.Repositories;
 
@@ -89,14 +90,17 @@ namespace Tala.Services
             return null;
         }
 
-        public Task<Order> GetOrderByIdForUserAsync(string buyerEmail, int orderId)
+        public async Task<Order> GetOrderByIdForUserAsync(string buyerEmail, int orderId)
         {
+            
             throw new NotImplementedException();
         }
 
-        public Task<IReadOnlyList<Order>> GetOrdersForUserAsync(string buyerEmail)
+        public async Task<IReadOnlyList<Order>> GetOrdersForUserAsync(string buyerEmail)
         {
-            throw new NotImplementedException();
+            var spec = new OrderWithItemsAndDeliverMethodSpecifications(buyerEmail);
+            var orders = await _unitOfWork.Repository<Order>().GetAllWithSpecAsync(spec);
+            return orders;
         }
     }
 }
